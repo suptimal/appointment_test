@@ -27,6 +27,12 @@
     background-color: #9B59B6;
     color: white;    
 }
+
+.my_calendar > ul > li.selected{
+    background-color: cadetblue;
+    color: white;    
+}
+
 .my_calendar > ul > li.inactive{
     color: grey    
 }

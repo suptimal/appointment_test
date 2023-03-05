@@ -6,6 +6,7 @@ class Calendar {
     #parent = undefined
 
     #selectedDate = ''
+    #selectedDateElement = false
     
     #months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     #days = ["Mon", "Thu", "Wed", "Thu", "Fri", "Sat", "Sun"]
@@ -82,9 +83,17 @@ class Calendar {
             let classList = i === new Date().getDate() && this.#currMonth === new Date().getMonth()
             && this.#currYear === new Date().getFullYear() ? "active" : "";
             classList = classList + " availible_date"
-            let el = this.#appendDay(cal_days, 'li', i, classList)
             let d = this.#currYear + "-" + String(this.#currMonth).padStart(2, 0) + "-" + String(i).padStart(2, 0)
-            el.addEventListener('click', () => this.#selectedDate = d)
+            if (d == this.#selectedDate){
+                classList = classList + " selected"
+            } 
+            let el = this.#appendDay(cal_days, 'li', i, classList)
+            el.addEventListener('click', (e) => {
+                this.#selectedDate = d
+                this.#selectedDateElement && this.#selectedDateElement.classList.remove('selected')
+                this.#selectedDateElement = el
+                el.classList.add('selected')
+            })
             el.addEventListener('click', (e) => {this.dateCallback()})
         }
 
