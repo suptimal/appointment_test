@@ -58,9 +58,46 @@
 
     <script src="/js/calendar.js"></script>
     <script>
+        function displayTimeSlots(date, timeSlots) {
+            let apps = document.querySelector('#day_appointments')
+            apps.innerHTML = `Aktiver Tag: ${date}`
+            let ul = document.createElement('ul')
+            apps.appendChild(ul)
+            timeSlots.forEach(ts => {
+                let li = document.createElement('li')
+                li.innerText = ts
+                ul.appendChild(li)
+            });
+        }
         let cal = new Calendar('#calendar', () => {
-            console.log(cal.getSelectedDate())
+            displayTimeSlots(
+                cal.getSelectedDate(),
+                getTimeSlots(cal.getSelectedDate())
+                )
         })
+        const time_slots = ['10:00', '11:00', '14:00', '15:00', '16:00'];
+        const chooseRandom = (arr, num = 1) => {
+        const res = [];
+        for(let i = 0; i < num; ){
+            const random = Math.floor(Math.random() * arr.length);
+            if(res.indexOf(arr[random]) !== -1){
+                continue;
+            };
+            res.push(arr[random]);
+            i++;
+        };
+        return res;
+        };
+        var dates = {}
+        function getTimeSlots(date) {
+            if (date in dates === false){
+                dates[date] = chooseRandom(
+                    time_slots, 
+                    Math.floor(Math.random()*time_slots.length)
+                    ).sort()
+            }
+            return dates[date]
+        }
     </script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="/css/calendar.css">
