@@ -5,12 +5,16 @@ class Calendar {
     #currMonth = this.#date.getMonth()
     #parent = undefined
 
+    #selectedDate = ''
+    
     #months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     #days = ["Mon", "Thu", "Wed", "Thu", "Fri", "Sat", "Sun"]
-
-
-    constructor(parent_selector, locale = "de"){
+    
+    
+    constructor(parent_selector, dateCallback = () => {console.log('DATE PREESED')},locale = "de"){
         this.#parent = document.querySelector(parent_selector)
+        
+        this.dateCallback = dateCallback
     
 
         switch (locale) {
@@ -80,7 +84,8 @@ class Calendar {
             classList = classList + " availible_date"
             let el = this.#appendDay(cal_days, 'li', i, classList)
             let d = this.#currYear + "-" + String(this.#currMonth).padStart(2, 0) + "-" + String(i).padStart(2, 0)
-            el.addEventListener('click', (e) => {console.log(d)})
+            el.addEventListener('click', () => this.#selectedDate = d)
+            el.addEventListener('click', (e) => {this.dateCallback()})
         }
 
         // creating li of next month first days
@@ -111,6 +116,10 @@ class Calendar {
             this.#currYear -= 1
         }
         this.renderCalendar()
+    }
+
+    getSelectedDate(){
+        return this.#selectedDate
     }
     
 }    
