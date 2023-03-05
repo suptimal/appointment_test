@@ -1,0 +1,59 @@
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.my_calendar {
+    padding: 10px;
+}
+
+.my_calendar > ul {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    list-style: none;
+    padding: 0;
+    gap: 4px;
+}
+
+.my_calendar > ul > li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+
+.my_calendar > ul > li.active{
+    background-color: #9B59B6;
+    color: white;    
+}
+.my_calendar > ul > li.inactive{
+    color: grey    
+}
+.my_calendar > header > p { margin: 0;}
+.my_calendar > header {
+    font-weight: 600;
+    font-size: xx-large;
+    display: flex;
+    justify-content: space-between;
+}
+
+.my_calendar > header > span {
+    display: flex;
+}
+
+.my_calendar > header > span > .icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.my_calendar  .icon:hover{
+    background-color: red;
+    cursor: pointer;
+}
+.my_calendar  .availible_date:hover{
+    background-color: lightblue;
+    cursor: pointer;
+}
